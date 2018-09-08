@@ -5,9 +5,9 @@ public class Easy3 {
     public static void main(String [] args){
         Scanner scan = new Scanner(System.in);
 
-        String s = scan.next();
-        double d = Double.parseDouble(scan.next());
-        int i = Integer.parseInt(scan.next());
+        int i = Integer.parseInt(scan.nextLine());
+        double d = Double.parseDouble(scan.nextLine());
+        String s = scan.nextLine();
 
         System.out.println("String: " + s);
         System.out.println("Double: " + i);
