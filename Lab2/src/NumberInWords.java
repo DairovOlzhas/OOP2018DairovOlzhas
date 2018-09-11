@@ -17,6 +17,46 @@ public class NumberInWords {
         }
         return new String(in);
     }
+
+    public static String nums(char n, int c){
+        String num = "";
+        if(n == '0')
+            if(c == 1)
+                num = "ten";
+        if(n == '1')
+            if(c == 0)
+                num = "one";
+        if(n == '2')
+            if(c == 0)
+                num = "two";
+            else if(c == 1)
+                num = "twen";
+        if(n == '3')
+            if(c == 0)
+                num = "three";
+            else if(c == 1)
+                num = "thir";
+        if(n == '4')
+            num = "four";
+        if(n == '5')
+            if(c == 0)
+                num = "five";
+            else if(c == 1)
+                num = "fif";
+        if(n == '6')
+            num = "six";
+        if(n == '7')
+            num = "seven";
+        if(n == '8')
+            if(c == 0)
+                num = "eight";
+            else if(c == 1)
+                num = "eigh";
+        if(n == '9')
+            num = "nine";
+        return num;
+    }
+
     public static void main(String [] args){
         Scanner sc = new Scanner(System.in);
 
@@ -24,73 +64,36 @@ public class NumberInWords {
         String res = "";
 
         n = NumberInWords.reverse(n);
-        n += "     |";
      //   System.out.print(n);
-        for (int i = 0; i < n.length()-6; i++){
+        n += " ";
+
+        for (int i = 0; i < n.length()-1; i++){          // 9 8 7 6 5 4
+                                                       // 5 4 3 2 1 0
             String num = "";
-            if(n.charAt(i) == '1')
-                num = "one";
-            if(n.charAt(i) == '2')
-                num = "two";
-            if(n.charAt(i) == '3')
-                num = "three";
-            if(n.charAt(i) == '4')
-                num = "four";
-            if(n.charAt(i) == '5')
-                num = "five";
-            if(n.charAt(i) == '6')
-                num = "six";
-            if(n.charAt(i) == '7')
-                num = "seven";
-            if(n.charAt(i) == '8')
-                num = "eight";
-            if(n.charAt(i) == '9')
-                num = "nine";
-
-            if(i%3==1 || (n.charAt(i+1) == '1' && i%3==0)){
-                if(n.charAt(i)=='3')
-                    num = "thir";
-                if(n.charAt(i)=='5')
-                    num = "fif";
-                if(n.charAt(i)=='8')
-                    num = "eigh";
-            }
-
-            if(i%3==0 && n.charAt(i) != 0) {
-                if(n.charAt(i+1) != '1') {
-                    res = num + res;
-                    continue;
+            if(i%3 == 0){
+                if(n.charAt(i+1) != '1'){
+                    num = nums(n.charAt(i), 0);
                 }
-                else{
-                    if(n.charAt(i) == '1')
+                if(i==3)
+                    num += (num != "") ? "thousand" : " thousand";
+            }
+            if(i%3 == 1){
+                if(n.charAt(i)== '1'){
+                    if(n.charAt(i-1)=='1')
                         num = "eleven";
-                    else if (n.charAt(i) == '2')
+                    else if(n.charAt(i-1)=='2')
                         num = "twelve";
-                    else
-                        num += "teen";
+                    else num = nums(n.charAt(i-1), 1) + "teen";
+                }else if(n.charAt(i) != '0'){
+                    num = nums(n.charAt(i), 1) + "ty";
                 }
             }
-
-            if((i)%3==1){
-                if(n.charAt(i)=='1')
-                    if(n.charAt(i-1)=='0')
-                        num = "ten";
-                    else
-                        num = "";
-                else if(n.charAt(i)!='1')
-                    num += "ty";
-                if(num != "")
-                    num = " " + num;
-                if((i==1 && n.length() > 8) || (i==4 && n.length() > 10))
-                num = "[and]"+num;
+            if(i%3 == 2){
+                if(res != "")
+                    num = "[and]";
+                num = (num != "") ? nums(n.charAt(i), 0) + " hundred " + num : nums(n.charAt(i), 0) + " hundred";
             }
 
-            if((i)%3==2){
-                num += " hundred";
-            }
-
-            if(i == 3)
-                num += " thousand";
             //System.out.println(num);
             res = num + " " + res;
         }
