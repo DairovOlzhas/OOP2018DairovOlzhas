@@ -11,15 +11,15 @@ public class Student {
         this.name = name;
     }
 
-    int getId(){
+    public int getId(){
         return id;
     }
 
-    String getName(){
+    public String getName(){
         return name;
     }
 
-    int getYearOfStudy(){
+    public int getYearOfStudy(){
         return yearOfStudy;
     }
 

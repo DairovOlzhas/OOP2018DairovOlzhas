@@ -16,13 +16,10 @@ public class NumberInWords {
             begin++;
         }
         return new String(in);
-    }
+    } // reversing number string for correct indicating of digit place
 
     public static String nums(char n, int c){
         String num = "";
-        if(n == '0')
-            if(c == 1)
-                num = "ten";
         if(n == '1')
             if(c == 0)
                 num = "one";
@@ -55,7 +52,7 @@ public class NumberInWords {
         if(n == '9')
             num = "nine";
         return num;
-    }
+    } // function which return digit in words in correct form by position
 
     public static void main(String [] args){
         Scanner sc = new Scanner(System.in);
@@ -64,22 +61,23 @@ public class NumberInWords {
         String res = "";
 
         n = NumberInWords.reverse(n);
-     //   System.out.print(n);
-        n += " ";
+        n += " ";  // avoiding problem with checking previous digit
 
-        for (int i = 0; i < n.length()-1; i++){          // 9 8 7 6 5 4
-                                                       // 5 4 3 2 1 0
-            String num = "";
-            if(i%3 == 0){
+        for (int i = 0; i < n.length()-1; i++){
+
+            String num = "";  // every digit in words
+            if(i%3 == 0){  // single digit
                 if(n.charAt(i+1) != '1'){
                     num = nums(n.charAt(i), 0);
                 }
                 if(i==3)
-                    num += (num != "") ? "thousand" : " thousand";
+                    num += (num != "") ? " thousand" : "thousand";
             }
-            if(i%3 == 1){
+            else if(i%3 == 1){ // decimal digit
                 if(n.charAt(i)== '1'){
-                    if(n.charAt(i-1)=='1')
+                    if(n.charAt(i-1)=='0')
+                        num = "ten";
+                    else if(n.charAt(i-1)=='1')
                         num = "eleven";
                     else if(n.charAt(i-1)=='2')
                         num = "twelve";
@@ -88,14 +86,16 @@ public class NumberInWords {
                     num = nums(n.charAt(i), 1) + "ty";
                 }
             }
-            if(i%3 == 2){
-                if(res != "")
-                    num = "[and]";
-                num = (num != "") ? nums(n.charAt(i), 0) + " hundred " + num : nums(n.charAt(i), 0) + " hundred";
+            else if(i%3 == 2){  //hundreds
+
+               if(n.charAt(i-1)!= '0' || n.charAt(i-2)!='0')
+                   num = "[and]";
+               if(n.charAt(i) != '0')
+                   num = (num != "") ? nums(n.charAt(i), 0) + " hundred " + num : nums(n.charAt(i), 0) + " hundred";
             }
 
             //System.out.println(num);
-            res = num + " " + res;
+            res = (num != "") ? num + " " + res : res;
         }
 
         System.out.println(res);

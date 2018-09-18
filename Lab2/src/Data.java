@@ -7,7 +7,6 @@ public class Data {
     private double maximum;
 
     public Data(){
-        count = 0;
     }
 
     public void add(double input){
