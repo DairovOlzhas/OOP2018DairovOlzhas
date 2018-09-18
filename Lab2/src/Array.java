@@ -8,14 +8,22 @@ public class Array {
 
         Scanner sc = new Scanner(System.in);
 
-        Set<Integer> a = new HashSet<>();
+
+        int[] a = new int[100000];
+        int[] b = new int[100000];
+        int k = 0;
+
         while(sc.hasNextInt()){
-            a.add(sc.nextInt());
+            a[k++] = sc.nextInt();
         }
-        Integer[] b = {};
-        b = a.toArray(new Integer[a.size()]);
-        for(int i = 0; i < b.length; i++){
-            System.out.print(b[i] + " " + b[i] + " ");
+
+        for(int i = 0; i < k; i++){
+            b[i*2] = a[i];
+            b[i*2+1] = a[i];
+        }
+
+        for(int i = 0; i < k*2; i++){
+            System.out.print(b[i] + " ");
         }
     }
 }
