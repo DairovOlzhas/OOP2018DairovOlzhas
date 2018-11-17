@@ -18,16 +18,33 @@ public class CourseFile {
     public File getFile() { return file; }
 
     public String getFileName() { return fileName; }
-
     public void setFileName(String fileName) { this.fileName = fileName; }
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == this) {
-            CourseFile cf = (CourseFile) obj;
-            return file.equals(cf.file) && fileName.equals(cf.fileName);
-        }
-        return false;
+        if(this == obj)
+            return true;
+        if(obj == null)
+            return false;
+        if(obj.getClass() != getClass())
+            return false;
+        CourseFile other = (CourseFile) obj;
+        if (fileName == null) {
+            if (other.fileName != null)
+                return false;
+        } else if (!fileName.equals(other.fileName))
+            return false;
+        if (dateOfLoading == null) {
+            if (other.dateOfLoading != null)
+                return false;
+        } else if (!dateOfLoading.equals(other.dateOfLoading))
+            return false;
+        if (file == null) {
+            if (other.file != null)
+                return false;
+        } else if (!file.equals(other.file))
+            return false;
+        return true;
     }
 
     @Override

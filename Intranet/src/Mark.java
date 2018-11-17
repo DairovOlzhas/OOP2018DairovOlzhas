@@ -11,17 +11,26 @@ public class Mark {
     }
 
     public Date getDate() { return date; }
-
-    public double getPoint() { return point; }
-
     public void setDate(Date date) { this.date = date; }
 
+    public double getPoint() { return point; }
     public void setPoint(double point) { this.point = point; }
 
     @Override
     public boolean equals(Object obj) {
-        Mark m = (Mark) obj;
-        return point == m.point && date.equals(m.date);
+        if(this == obj)
+            return true;
+        if(obj == null)
+            return false;
+        if(obj.getClass() != getClass())
+            return false;
+        Mark other = (Mark) obj;
+        if (date == null) {
+            if (other.date != null)
+                return false;
+        } else if (!date.equals(other.date))
+            return false;
+        return point == other.point;
     }
 
     @Override
