@@ -1,8 +1,10 @@
+import javax.xml.crypto.Data;
 import java.awt.image.AreaAveragingScaleFilter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Vector;
 
-public class Database {
+public class Database implements Serializable {
     static Vector<Student> students;
     static Vector<Teacher> teachers;
     static Vector<Admin> admins;
@@ -20,6 +22,33 @@ public class Database {
         managers = new Vector<>();
         orders = new Vector<>();
         donedOrders = new Vector<>();
+    }
+
+    public static void serialize() {
+        try {
+            ObjectOutputStream ois = new ObjectOutputStream(new FileOutputStream("Database.out"));
+            ois.writeObject(Driver.d);
+            ois.close();
+        }catch (FileNotFoundException fn){
+
+        }catch (IOException io){
+
+        }
+
+    }
+
+    public static void deserialize() {
+        try {
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Database.out"));
+            Driver.d = (Database)ois.readObject();
+            ois.close();
+        }catch (FileNotFoundException fn){
+
+        }catch (IOException io){
+
+        }catch (ClassNotFoundException cnfe){
+
+        }
     }
 
     void remStudent(Student student){

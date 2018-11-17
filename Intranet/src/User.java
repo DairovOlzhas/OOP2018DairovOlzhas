@@ -16,7 +16,7 @@ public abstract class User implements Serializable {
     public User(String id, Gender gender, String lastname, String firstname, String telNumber, String email){
         this.id = id;
         this.gender = gender;
-        username = firstname.charAt(0) + " " + lastname;
+        username = firstname.charAt(0) + "_" + lastname;
         this.lastname = lastname;
         this.firstname = firstname;
         password = "kbtu111";

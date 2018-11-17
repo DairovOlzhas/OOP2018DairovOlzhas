@@ -30,7 +30,7 @@ public class Course implements Serializable{
 		this.courseCode = courseCode;
 		this.spec = spec;
 	}
-    
+
 
 	public String getName() {
 		return name;
