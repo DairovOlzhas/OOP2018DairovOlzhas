@@ -23,9 +23,9 @@ public class Driver {
         System.out.print("Password:__");
         String pass = reader.nextLine();
 
-        for (int i = 0; i < Database.teachers.size(); i++)
-            if (pass.equals(Database.teachers.elementAt(i).getPassword()) && log.equals(Database.teachers.elementAt(i).getUsername())) {
-                TeacherDriver.menu(Database.teachers.elementAt(i));
+        for (int i = 0; i < Database.getTeachers().size(); i++)
+            if (pass.equals(Database.getTeachers().elementAt(i).getPassword()) && log.equals(Database.getTeachers().elementAt(i).getUsername())) {
+                TeacherDriver.menu(Database.getTeachers().elementAt(i));
                 preLogin();
                 return;
             }

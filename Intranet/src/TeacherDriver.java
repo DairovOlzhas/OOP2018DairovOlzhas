@@ -6,12 +6,12 @@ import java.util.HashMap;
 
 public class TeacherDriver implements Serializable {
     static Teacher t;
-    public static void menu(Teacher teacher) throws NotCorrectMarkException{
+    public static void menu(Teacher teacher){
         System.out.println("Welcome " + teacher.getFirstname()+" "+teacher.getLastname()+"!!!");
         t = teacher;
         Teach_menu();
     }
-    private static void Teach_menu() throws NotCorrectMarkException{
+    private static void Teach_menu(){
 
         System.out.println("1. Information about me");
         System.out.println("2. Courses");
@@ -29,7 +29,7 @@ public class TeacherDriver implements Serializable {
         }
     }
 
-    private static void getInfo() throws NotCorrectMarkException{
+    private static void getInfo(){
         System.out.println("Full information :" + t.toString());
         System.out.println("Press 'q' to quite");
         System.out.print("#__");
@@ -38,7 +38,7 @@ public class TeacherDriver implements Serializable {
             Teach_menu();
         }
     }
-    private static void getCourse() throws NotCorrectMarkException{
+    private static void getCourse(){
         System.out.println("Courses List :");
         for(int i = 0 ; i < t.getCourses().size();i++){
             System.out.println((i+1)+". "+t.getCourses().get(i).getCourseName());
@@ -52,7 +52,7 @@ public class TeacherDriver implements Serializable {
             courseContent(in);
 
     }
-    private static void courseContent(String st) throws NotCorrectMarkException{
+    private static void courseContent(String st){
         System.out.println("1. List of Students");
         System.out.println("2. Course Files");
         System.out.println("3. Put Marks");
@@ -75,7 +75,7 @@ public class TeacherDriver implements Serializable {
         }
     }
 
-    private static void getListStudent(String it) throws NotCorrectMarkException{
+    private static void getListStudent(String it){
         for(int i = 0 ; i < t.getCourses().get(Integer.parseInt(it)-1).getStudents().size();i++){
             System.out.println((i+1)+". "+t.getCourses().get(Integer.parseInt(it)-1).getStudents().get(i).getFirstname()+" " +
                     t.getCourses().get(Integer.parseInt(it)-1).getStudents().get(i).getLastname()+"Point out of 100" +
@@ -90,7 +90,7 @@ public class TeacherDriver implements Serializable {
         }
     }
 
-    private static void putMarks(String it) throws NotCorrectMarkException{
+    private static void putMarks(String it){
         for(int i = 0; i < t.getCourses().get(Integer.parseInt(it)-1).getStudents().size();i++){
             System.out.println((i+1)+". "+ t.getCourses().get(Integer.parseInt(it)-1).getStudents().get(i).getFirstname() + " "+
                     t.getCourses().get(Integer.parseInt(it)-1).getStudents().get(i).getLastname());
@@ -105,7 +105,7 @@ public class TeacherDriver implements Serializable {
             putMarkStudent(IndexOfSubject,IndexOfStudent);
         }
     }
-    private static void putMarkStudent(int indSubject,int indStudent) throws NotCorrectMarkException{
+    private static void putMarkStudent(int indSubject,int indStudent){
         System.out.println("Enter Mark range of 0 - 100 ");
         System.out.print("#__");
         String ans = Driver.reader.nextLine();
