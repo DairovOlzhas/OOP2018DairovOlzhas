@@ -43,20 +43,22 @@ public class Student extends User implements Serializable{
     public void setSpecialization(String specialization) { this.specialization = specialization; }
 
     public Vector<Course> getTakenCourses() { return takenCourses; }
+    public void setTakenCourses(Vector<Course> takenCourses) { this.takenCourses = takenCourses; }
 
-    public void addToTakenCourse(Course course) {
-        course.addStudent(this);
+    public void TakeCourse(Course course) {
+        Vector<Course> courses = Database.getCourses();
+        int index = courses.indexOf(course);
+        Vector<Student> students = course.getStudents();
+        students.addElement(this);
+        course.setStudents(students);
+        courses.setElementAt(course, index);
         takenCourses.addElement(course);
     }
-    public void remFromTakenCourse(Course course) {
-        course.remStudent(this);
-        takenCourses.removeElement(course);
-    }
+
 
     public HashMap<Course, Vector<Mark>> getMarks() { return marks; }
-    public void addMark(Course course, Mark mark) { marks.get(course).addElement(mark);}
-    public void setMark(Course course, Mark fromMark, Mark toMark) { marks.get(course).setElementAt(toMark, marks.get(course).indexOf(fromMark));}
-    public void remMark(Course course, Mark mark) { marks.get(course).removeElement(mark);}
+    public void setMarks(HashMap<Course, Vector<Mark>> marks) { this.marks = marks; }
+
 
     @Override
     public boolean equals(Object obj) {

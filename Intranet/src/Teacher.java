@@ -1,3 +1,4 @@
+import javax.xml.crypto.Data;
 import java.util.*;
 
 public class Teacher extends Employee{
@@ -12,11 +13,50 @@ public class Teacher extends Employee{
     }
 
     public Vector<Course> getCourses() { return courses; }
-    public void addCourse(Course course) { courses.addElement(course); }
-    public void remCourse(Course course) { courses.removeElement(course); }
+    public void setCourses(Vector<Course> courses) { this.courses = courses; }
 
     public Position getPosition() { return position; }
     public void setPosition(Position position) { this.position = position; }
+
+    public void addCourseFile(Course course, CourseFile courseFile) {
+        Vector<CourseFile> courseFiles = course.getCourseFiles();
+        courseFiles.addElement(courseFile);
+        course.setCourseFiles(courseFiles);
+    }
+    public void remCourseFile(Course course, CourseFile courseFile) {
+        Vector<CourseFile> courseFiles = course.getCourseFiles();
+        courseFiles.removeElement(courseFile);
+        course.setCourseFiles(courseFiles);
+    }
+
+    public void addMark(Course course, Mark mark, Student student) {
+        int index = Database.getStudents().indexOf(student);
+        HashMap<Course, Vector<Mark>> marks = student.getMarks();
+        marks.get(course).addElement(mark);
+        student.setMarks(marks);
+        Vector<Student> students = Database.getStudents();
+        students.setElementAt(student, index);
+        Database.setStudents(students);
+    }
+    public void setMark(Course course, Mark fromMark, Mark toMark, Student student) {
+        int index = Database.getStudents().indexOf(student);
+        HashMap<Course, Vector<Mark>> marks = student.getMarks();
+        marks.get(course).setElementAt(toMark, marks.get(course).indexOf(fromMark));
+        student.setMarks(marks);
+        Vector<Student> students = Database.getStudents();
+        students.setElementAt(student, index);
+        Database.setStudents(students);
+    }
+    public void remMark(Course course, Mark mark, Student student) {
+        int index = Database.getStudents().indexOf(student);
+        HashMap<Course, Vector<Mark>> marks = student.getMarks();
+        marks.get(course).removeElement(mark);
+        student.setMarks(marks);
+        Vector<Student> students = Database.getStudents();
+        students.setElementAt(student, index);
+        Database.setStudents(students);
+    }
+
 
     @Override
     public boolean equals(Object obj) {

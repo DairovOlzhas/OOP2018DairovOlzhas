@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Vector;
 
 public abstract class Employee extends User implements Salariable{
     private int salary;
@@ -12,7 +13,11 @@ public abstract class Employee extends User implements Salariable{
 
     public void setSalary(int salary) { this.salary = salary; }
 
-    void sendOrder(Order order){Database.addOrder(order); }
+    void sendOrder(Order order){
+        Vector<Order> orders = Database.getOrders();
+        orders.addElement(order);
+        Database.setOrders(orders);
+    }
 
     public int getSalary(){ return salary; }
 

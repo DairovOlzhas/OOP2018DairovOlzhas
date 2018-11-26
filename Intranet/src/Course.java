@@ -8,7 +8,7 @@ public class Course {
     private int credit;
     private Teacher teacher;
     private Vector<Student> students;
-    private Vector<CourseFile> files;
+    private Vector<CourseFile> courseFiles;
     private HashMap<Day, String> time;
 
     public Course(String courseName, String courseCode, int credit, Teacher teacher){
@@ -17,7 +17,7 @@ public class Course {
         this.courseName = courseName;
         this.teacher = teacher;
         time = new HashMap<Day, String>();
-        files = new Vector<CourseFile>();
+        courseFiles = new Vector<CourseFile>();
         students = new Vector<Student>();
     }
 
@@ -30,16 +30,14 @@ public class Course {
     public int getCredit() { return credit; }
     public void setCredit(int credit) { this.credit = credit; }
 
-    public Vector<Student> getStudent() { return students; }
-    public void addStudent(Student student) {students.addElement(student);}
-    public void remStudent(Student student) {students.removeElement(student);}
+    public Vector<Student> getStudents() { return students; }
+    public void setStudents(Vector<Student> students) { this.students = students; }
 
     public Teacher getTeacher() { return teacher; }
     public void setTeacher(Teacher teacher) { this.teacher = teacher; }
 
-    public Vector<CourseFile> getFiles() { return files; }
-    public void addFile(CourseFile file) { files.addElement(file); }
-    public void remFile(CourseFile file) { files.removeElement(file); }
+    public Vector<CourseFile> getCourseFiles() { return courseFiles; }
+    public void setCourseFiles(Vector<CourseFile> files) { this.courseFiles = files; }
 
     public HashMap<Day, String> getTime() { return time; }
     public void setTime(HashMap<Day, String> time) { this.time = time; }

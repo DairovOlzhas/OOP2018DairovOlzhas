@@ -1,30 +1,54 @@
+import javax.xml.crypto.Data;
 import java.util.Vector;
 
 public class Manager extends Employee {
-    private static Vector<Course> courses = new Vector<>();
 
     Manager(String id, Gender gender, String lastname, String firstname, String telNumber, String email, int salary){
         super(id, gender, lastname, firstname, telNumber, email, salary);
     }
 
-    public static Vector<Course> getCourses() { return courses; }
 
     public static void addCourse(Course course) {
+        Vector<Course> courses = Database.getCourses();
         courses.addElement(course);
-        course.getTeacher().addCourse(course);
+        Database.setCourses(courses);
+
+        Vector<Teacher> teachers = Database.getTeachers();
+        for(int i = 0 ; i < teachers.size(); i++){
+            if(teachers.elementAt(i).equals(course.getTeacher())){
+                courses = teachers.elementAt(i).getCourses();
+                courses.addElement(course);
+                teachers.elementAt(i).setCourses(courses);
+            }
+        }
+        Database.setTeachers(teachers);
     }
 
     public static void remCourse(Course course) {
-        Manager.courses.removeElement(course);
-        for(int i = 0; i < Database.students.size(); i++)
-            Database.students.elementAt(i).getTakenCourses().remove(course);
-        course.getTeacher().remCourse(course);
+        Vector<Course> courses = Database.getCourses();
+        courses.removeElement(course);
+        Database.setCourses(courses);
+        Vector<Student> students = Database.getStudents();
+        for(int i = 0 ; i < students.size(); i++){
+            if(students.elementAt(i).getTakenCourses().removeElement(course)){
+                courses = students.elementAt(i).getTakenCourses();
+                courses.removeElement(course);
+                students.elementAt(i).setTakenCourses(courses);
+            }
+        }
+        Database.setStudents(students);
+
+        Vector<Teacher> teachers = Database.getTeachers();
+        for(int i = 0 ; i < teachers.size(); i++){
+            if(teachers.elementAt(i).equals(course.getTeacher())){
+                courses = teachers.elementAt(i).getCourses();
+                courses.removeElement(course);
+                teachers.elementAt(i).setCourses(courses);
+            }
+        }
+        Database.setTeachers(teachers);
     }
 
-    public static void remStudent(Student student) {
-        for(int i = 0; i < courses.size(); i++)
-            courses.elementAt(i).remStudent(student);
-    }
 
 
 }

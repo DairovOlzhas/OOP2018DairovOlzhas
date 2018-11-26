@@ -14,6 +14,7 @@ public class Database implements Serializable {
     private static Vector<Manager> managers;
     private static Vector<Order> orders;
     private static Vector<Order> donedOrders;
+    private static Vector<Course> courses;
 
 
     public Database(){
@@ -24,6 +25,7 @@ public class Database implements Serializable {
         managers = new Vector<>();
         orders = new Vector<>();
         donedOrders = new Vector<>();
+        courses = new Vector<>();
     }
 
 
@@ -55,45 +57,30 @@ public class Database implements Serializable {
         }
     }
 
-    static void remAdmin(Admin admin){ Database.admins.removeElement(admin); }
+
     static Vector<Admin> getAdmins() { return admins; }
-    static void addAdmin(Admin admin) { admins.addElement(admin); }
+    public static void setAdmins(Vector<Admin> admins) { Database.admins = admins; }
 
-    static void remExecutor(Executor executor){ Database.executors.removeElement(executor); }
     static Vector<Executor> getExecutors() { return executors; }
-    static void addExecutor(Executor executor) { executors.addElement(executor); }
+    public static void setExecutors(Vector<Executor> executors) { Database.executors = executors; }
 
-    static void remStudent(Student student){
-        Database.students.removeElement(student);
-        for(int i = 0; i < Manager.getCourses().size(); i++)
-            Manager.getCourses().elementAt(i).remStudent(student);
-    }
     static Vector<Student> getStudents() { return students; }
-    static void addStudent(Student student) { students.addElement(student); }
+    public static void setStudents(Vector<Student> students) { Database.students = students; }
 
-    static void remTeacher(Teacher teacher) {
-        Database.teachers.removeElement(teacher);
-        for(int i = 0; i < teacher.getCourses().size(); i++){
-            teacher.getCourses().elementAt(i).setTeacher(null);
-        }
-    }
     static Vector<Teacher> getTeachers() { return teachers; }
-    static void addTeacher(Teacher teacher) { teachers.addElement(teacher); }
+    public static void setTeachers(Vector<Teacher> teachers) { Database.teachers = teachers; }
 
-    static void remManager(Manager manager){
-        Database.managers.removeElement(manager);
-    }
     public static Vector<Manager> getManagers() { return managers; }
-    public static void addManager(Manager manager) { managers.addElement(manager); }
+    public static void setManagers(Vector<Manager> managers) { Database.managers = managers; }
 
-    static void remDonedOrder(Order order){ donedOrders.removeElement(order); }
     static Vector<Order> getDonedOrders() { return donedOrders; }
-    static void addDonedOrder(Order order) { donedOrders.addElement(order); }
+    public static void setDonedOrders(Vector<Order> donedOrders) { Database.donedOrders = donedOrders; }
 
-    static void remOrder(Order order){ orders.removeElement(order); }
     static Vector<Order> getOrders() { return orders; }
-    static void addOrder(Order order) { orders.addElement(order); }
+    public static void setOrders(Vector<Order> orders) { Database.orders = orders; }
 
+    public static Vector<Course> getCourses() { return courses; }
+    public static void setCourses(Vector<Course> courses) { Database.courses = courses; }
 
     @Override
     public String toString() {

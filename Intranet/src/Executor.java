@@ -1,3 +1,4 @@
+import javax.xml.crypto.Data;
 import java.util.Vector;
 
 public class Executor extends Employee{
@@ -12,11 +13,18 @@ public class Executor extends Employee{
 
     public void doOrder(Order donedOrder) {
         if(!donedOrder.getStatus()){
+            Vector<Order> orders = Database.getOrders();
+            orders.removeElement(donedOrder);
+            Database.setOrders(orders);
+            orders = Database.getDonedOrders();
             donedOrder.setStatus(true);
+            orders.addElement(donedOrder);
+            Database.setDonedOrders(orders);
             donedOrders++;
-            Database.donedOrders.addElement(donedOrder);
         }
     }
+
+
 
     @Override
     public boolean equals(Object obj) {
