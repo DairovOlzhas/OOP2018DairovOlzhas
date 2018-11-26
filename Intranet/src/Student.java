@@ -54,9 +54,9 @@ public class Student extends User implements Serializable{
     }
 
     public HashMap<Course, Vector<Mark>> getMarks() { return marks; }
-    public void putMark(Course course, Mark mark) { marks.get(course).addElement(mark);}
+    public void addMark(Course course, Mark mark) { marks.get(course).addElement(mark);}
     public void setMark(Course course, Mark fromMark, Mark toMark) { marks.get(course).setElementAt(toMark, marks.get(course).indexOf(fromMark));}
-    public void delMark(Course course, Mark mark) { marks.get(course).removeElement(mark);}
+    public void remMark(Course course, Mark mark) { marks.get(course).removeElement(mark);}
 
     @Override
     public boolean equals(Object obj) {

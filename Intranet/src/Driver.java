@@ -25,30 +25,31 @@ public class Driver {
 
         for (int i = 0; i < Database.teachers.size(); i++)
             if (pass.equals(Database.teachers.elementAt(i).getPassword()) && log.equals(Database.teachers.elementAt(i).getUsername())) {
-                TeacherDriver.menu();
+                TeacherDriver.menu(Database.teachers.elementAt(i));
                 preLogin();
                 return;
             }
 
         for (int i = 0; i < Database.admins.size(); i++)
             if (pass.equals(Database.admins.elementAt(i).getPassword()) && log.equals(Database.admins.elementAt(i).getUsername())){
-                AdminDriver.menu();
+                AdminDriver.menu(Database.admins.elementAt(i));
                 preLogin();
                 return;
             }
         for(int i = 0; i < Database.managers.size(); i++)
             if(pass.equals(Database.managers.elementAt(i).getPassword()) && log.equals(Database.managers.elementAt(i).getUsername())){
-                ManagerDriver.menu();
+                ManagerDriver.menu(Database.managers.elementAt(i));
                 preLogin();
                 return;
             }
         for(int i = 0; i < Database.students.size(); i++)
             if(pass.equals(Database.students.elementAt(i).getPassword()) && log.equals(Database.students.elementAt(i).getUsername())){
-                StudentDriver.menu();
+                StudentDriver.menu(Database.students.elementAt(i));
                 preLogin();
                 return;
             }
-        System.out.
+        System.out.println("Bad password or login!! Try again!!");
+        preLogin();
 
     }
 }

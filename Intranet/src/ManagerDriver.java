@@ -1,4 +1,4 @@
 public class ManagerDriver {
-    public static void menu() {
+    public static void menu(Manager manager) {
     }
 }

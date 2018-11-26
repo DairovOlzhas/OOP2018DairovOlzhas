@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
-public abstract class Employee extends User{
+public abstract class Employee extends User implements Salariable{
     private int salary;
 
     Employee(String id, Gender gender, String lastname, String firstname, String telNumber, String email, int salary){
@@ -12,8 +12,8 @@ public abstract class Employee extends User{
 
     public void setSalary(int salary) { this.salary = salary; }
 
-    void sendOrder(Order order){Database.orders.addElement(order); }
+    void sendOrder(Order order){Database.addOrder(order); }
 
-    int getSalary(){ return salary; }
+    public int getSalary(){ return salary; }
 
 }

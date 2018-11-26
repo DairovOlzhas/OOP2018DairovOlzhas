@@ -1,4 +1,5 @@
 public class TeacherDriver {
-    public static void menu() {
+
+    public static void menu(Teacher teacher) {
     }
 }

@@ -59,7 +59,7 @@ public class Tester {
     public static void main(String[] args){
         DB db = new DB();
         Vector<Person> a1 = new Vector<>();
-
+        AdminDriver.logger(new Teacher("asdf", Gender.MALE, "asdf", "asdf", "asdf", "asdf",25, Position.ASSISTENT), "added");
         DB.persons.addElement(new Person("DBperson", "id0"));
         DB.persons.addElement(new Person("DBperson", "id1"));
         DB.persons.addElement(new Person("DBperson", "id2"));
