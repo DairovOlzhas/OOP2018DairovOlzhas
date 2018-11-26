@@ -5,9 +5,12 @@ public class Mark {
     private double point;
     private Date date;
 
-    public Mark(double point, Date date){
-        this.point = point;
-        this.date = date;
+    public Mark(double point, Date date) throws NotCorrectMarkException{
+            this.point = point;
+            this.date = date;
+            if(point > 30){
+                throw new NotCorrectMarkException("Incorrect Mark");
+            }
     }
 
     public Date getDate() { return date; }
