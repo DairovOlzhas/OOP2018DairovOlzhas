@@ -1,4 +1,5 @@
 import javax.xml.crypto.Data;
+import java.util.Objects;
 import java.util.Vector;
 
 public class Executor extends Employee{
@@ -38,8 +39,11 @@ public class Executor extends Employee{
         return donedOrders == other.donedOrders;
     }
 
+
     @Override
     public String toString() {
-        return super.toString() + " Doned Orders: " + donedOrders;
+        return "Executor{" + "username = " + getUsername() + '\'' +
+                "donedOrders=" + donedOrders +
+                '}';
     }
 }

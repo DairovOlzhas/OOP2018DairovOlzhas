@@ -1,9 +1,10 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Vector;
 
-public abstract class Employee extends User implements Salariable{
+public abstract class Employee extends User implements Salariable, Serializable {
     private int salary;
 
     Employee(String id, Gender gender, String lastname, String firstname, String telNumber, String email, int salary){

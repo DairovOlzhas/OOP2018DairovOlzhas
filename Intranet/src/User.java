@@ -8,9 +8,10 @@ public abstract class User implements Serializable {
     private String firstname;
     private String lastname;
     private String password;
-    private String telNumber;
-    private String email;
 
+    private String telNumber;
+
+    private String email;
     public User(){}
 
     public User(String id, Gender gender, String lastname, String firstname, String telNumber, String email){
@@ -31,20 +32,20 @@ public abstract class User implements Serializable {
     public String getUsername() { return username; }
 
     public String getLastname() { return lastname; }
+
     public void setLastname(String lastname) { this.lastname = lastname; }
-
     public String getFirstname() { return firstname; }
+
     public void setFirstname(String firstname) { this.firstname = firstname; }
-
     public String getPassword() { return password; }
+
     public void setPassword(String password) { this.password = password; }
-
     public String getTelNumber() { return telNumber; }
+
     public void setTelNumber(String telNumber) { this.telNumber = telNumber; }
-
     public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
 
+    public void setEmail(String email) { this.email = email; }
     @Override
     public boolean equals(Object obj) {
         if(this == obj)
@@ -97,8 +98,18 @@ public abstract class User implements Serializable {
         return true;
     }
 
+
     @Override
     public String toString() {
-        return lastname + " " + firstname;
+        return "User{" +
+                "id='" + id + '\'' +
+                ", gender=" + gender +
+                ", username='" + username + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", password='" + password + '\'' +
+                ", telNumber='" + telNumber + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }

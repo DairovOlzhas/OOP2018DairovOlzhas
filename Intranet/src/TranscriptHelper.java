@@ -1,4 +1,6 @@
-public class TranscriptHelper {
+import java.io.Serializable;
+
+public class TranscriptHelper implements Serializable {
     private String courseName;
     private double gpa;
     private Grade grade;

@@ -82,6 +82,9 @@ public class Teacher extends Employee{
 
     @Override
     public String toString() {
-        return super.toString() + " " + position ;
+        return "Teacher{" +
+                "courses=" + courses +
+                ", position=" + position +
+                '}';
     }
 }

@@ -11,16 +11,14 @@ public class AdminDriver {
         System.out.println("------ADMIN MENU------");
         System.out.println("Welcome " + admin.getFirstname() + "!!");
         System.out.println();
+        Actions();
+    }
+
+    private static void Actions() {
         System.out.println("Choose action( q - to quit):");
         System.out.println("1) Add User");
         System.out.println("2) Remove User");
-        System.out.println("3) Update User");
-
-        System.out.println("3) Update Teacher");
-        System.out.println("6) Update Student");
-        System.out.println("9) Update Manager");
-        System.out.println("12) Update Admin");
-        System.out.println("13)View list of Users");
+        System.out.println("3) View list of Users");
 
         System.out.print("__");
         String com = Driver.reader.nextLine();
@@ -33,17 +31,62 @@ public class AdminDriver {
                 remUser();
                 break;
             case "3":
-                updUser();
+                viewListOfUser();
+                break;
+            case "q":
+                return;
+            default:
+                Actions();
+        }
+    }
+
+
+    private static void viewListOfUser() {
+        System.out.println("Choose users for view(b - to back):");
+        System.out.println("1) Teachers");
+        System.out.println("2) Admins");
+        System.out.println("3) Students");
+        System.out.println("4) Managers");
+        System.out.println("5) Executors");
+
+        System.out.print("__");
+        String in = Driver.reader.nextLine();
+
+        switch (in){
+            case "1":
+                for(int i = 0 ; i < Database.getTeachers().size(); i++)
+                    System.out.println((i+1) + ") " + Database.getTeachers().elementAt(i).getFirstname()
+                            + Database.getTeachers().elementAt(i).getLastname());
+                break;
+            case "2":
+                for(int i = 0 ; i < Database.getAdmins().size(); i++)
+                    System.out.println((i+1) + ") " + Database.getAdmins().elementAt(i).getFirstname()
+                            + Database.getAdmins().elementAt(i).getLastname());
+                break;
+            case "3":
+                for(int i = 0 ; i < Database.getStudents().size(); i++)
+                    System.out.println((i+1) + ") " + Database.getStudents().elementAt(i).getFirstname()
+                            + Database.getStudents().elementAt(i).getLastname());
                 break;
             case "4":
-                //viewList();
+                for(int i = 0 ; i < Database.getManagers().size(); i++)
+                    System.out.println((i+1) + ") " + Database.getManagers().elementAt(i).getFirstname()
+                            + Database.getManagers().elementAt(i).getLastname());
                 break;
+            case"5":
+                for(int i = 0 ; i < Database.getExecutors().size(); i++)
+                    System.out.println((i+1) + ") " + Database.getExecutors().elementAt(i).getFirstname()
+                            + Database.getExecutors().elementAt(i).getLastname());
+                break;
+            case "b":
+                Actions();
+                return;
+
         }
+        viewListOfUser();
 
     }
 
-    private static void updUser() {
-    }
 
     private static void remUser() {
         System.out.println("Removing User(b - to back):");
@@ -73,7 +116,7 @@ public class AdminDriver {
                 remExecutor();
                 break;
             case "b":
-                menu(adm);
+                Actions();
                 return;
             default:
                 break;
@@ -100,9 +143,10 @@ public class AdminDriver {
         int n = Integer.parseInt(in);
         if(n > 0 && n <= es.size()){
             Executor e = es.elementAt(n-1);
-            Database.remExecutor(e);
+            adm.remExecutor(e);
             System.out.println("Executor removed");
             logger(e, "removed");
+            Database.executorsSerialize();
         }else
             remManager();
     }
@@ -124,9 +168,10 @@ public class AdminDriver {
         int n = Integer.parseInt(in);
         if(n > 0 && n <= Database.getManagers().size()){
             Manager m = Database.getManagers().elementAt(n-1);
-            Database.remManager(m);
+            adm.remManager(m);
             System.out.println("Student removed");
             logger(m, "removed");
+            Database.managersSerialize();
         }else
             remManager();
     }
@@ -149,9 +194,10 @@ public class AdminDriver {
         int n = Integer.parseInt(in);
         if(n > 0 && n <= Database.getAdmins().size()){
             Admin a = Database.getAdmins().elementAt(n-1);
-            Database.remAdmin(a);
+            adm.remAdmin(a);
             System.out.println("Admin removed");
             logger(a, "removed");
+            Database.adminsSerialize();
         }else
             remAdmin();
     }
@@ -173,9 +219,10 @@ public class AdminDriver {
         int n = Integer.parseInt(in);
         if(n > 0 && n <= Database.getStudents().size()){
             Student s =  Database.getStudents().elementAt(n-1);
-            Database.remStudent(s);
+            adm.remStudent(s);
             System.out.println("Student removed");
             logger(s, "removed");
+            Database.studentsSerialize();
         }else
             remStudent();
     }
@@ -197,9 +244,10 @@ public class AdminDriver {
         int n = Integer.parseInt(in);
         if(n > 0 && n <= Database.getTeachers().size()){
             Teacher t = Database.getTeachers().elementAt(n-1);
-            Database.remTeacher(t);
+            adm.remTeacher(t);
             System.out.println("Teacher removed");
             logger(t, "removed");
+            Database.teachersSerialize();
         }else
             remTeacher();
     }
@@ -214,7 +262,10 @@ public class AdminDriver {
 
         System.out.print("__");
         String in = Driver.reader.nextLine();
-
+        if(in.equals("b")){
+            Actions();
+            return;
+        }
         System.out.print("ID:__");
         String id = Driver.reader.nextLine();
         System.out.print("First Name:__");
@@ -245,7 +296,7 @@ public class AdminDriver {
             case "5":
                 addExecutor(id, gender, firstname, lastname, telNumb, email);
             case "b":
-                menu(adm);
+                Actions();
                 return;
             default:
                 break;
@@ -257,30 +308,33 @@ public class AdminDriver {
         System.out.print("Salary :__");
         int salary = Integer.parseInt(Driver.reader.nextLine());
         Executor e = new Executor(id, gender, lastname, firstname, telNumb, email,  salary);
-        Database.addExecutor(e);
+        adm.addExecutor(e);
         System.out.println("Executor added successfully!!");
         logger(e, "added");
-        menu(adm);
+        Database.executorsSerialize();
+        Actions();
     }
 
     private static void addManager(String id, Gender gender, String firstname, String lastname, String telNumb, String email) {
         System.out.print("Salary :__");
         int salary = Integer.parseInt(Driver.reader.nextLine());
         Manager m = new Manager(id, gender, lastname, firstname, telNumb, email,  salary);
-        Database.addManager(m);
+        adm.addManager(m);
         System.out.println("Manager added successfully!!");
         logger(m, "added");
-        menu(adm);
+        Database.managersSerialize();
+        Actions();
     }
 
     private static void addAdmin(String id, Gender gender,String firstname, String lastname, String telNumb,String email) {
         System.out.print("Salary :__");
         int salary = Integer.parseInt(Driver.reader.nextLine());
         Admin a = new Admin(id, gender, lastname, firstname, telNumb, email,  salary);
-        Database.addAdmin(a);
+        adm.addAdmin(a);
         System.out.println("Admin added successfully!!");
         logger(a, "added");
-        menu(adm);
+        Database.adminsSerialize();
+        Actions();
     }
 
     private static void addStudent(String id, Gender gender,String firstname, String lastname, String telNumb,String email) {
@@ -294,10 +348,11 @@ public class AdminDriver {
         System.out.print("Degree: \n1) Bachelor\n 2)Magistr\n__");
         Degree degree = (Driver.reader.nextLine().equals("1")) ? Degree.BACHULAR : Degree.MAGISTRANT;
         Student s = new Student(id, gender, lastname, firstname, telNumb, email, faculty, specialization, year, degree);
-        Database.addStudent(s);
+        adm.addStudent(s);
         System.out.println("Student added successfully!!");
         logger(s, "added");
-        menu(adm);
+        Database.studentsSerialize();
+        Actions();
     }
 
     private static void addTeacher(String id, Gender gender,String firstname, String lastname, String telNumb,String email) {
@@ -307,10 +362,11 @@ public class AdminDriver {
         System.out.print("Salary :__");
         int salary = Integer.parseInt(Driver.reader.nextLine());
         Teacher t = new Teacher(id, gender, lastname, firstname, email, telNumb, salary, position);
-        Database.addTeacher(t);
+        adm.addTeacher(t);
         System.out.println("Teacher added successfully!!");
         logger(t, "added");
-        menu(adm);
+        Database.teachersSerialize();
+        Actions();
     }
 
     public static void logger(Object obj, String action) {

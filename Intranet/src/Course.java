@@ -1,8 +1,9 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Vector;
 
-public class Course {
+public class Course implements Serializable {
     private String courseName;
     private String courseCode;
     private int credit;

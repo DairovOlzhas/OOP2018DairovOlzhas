@@ -29,11 +29,31 @@ public class Database implements Serializable {
     }
 
 
-
     public static void serialize() {
+        teachersSerialize();
+        studentsSerialize();
+        managersSerialize();
+        adminsSerialize();
+        executorsSerialize();
+        ordersSerialize();
+        donedOrdersSerialize();
+        coursesSerialize();
+    }
+    public static void deserialize() {
+        teachersDeserialize();
+        studentsDeserialize();
+        managersDeserialize();
+        adminsDeserialize();
+        executorsDeserialize();
+        ordersDeserialize();
+        donedOrdersDeserialize();
+        coursesDeserialize();
+    }
+
+    public static void teachersSerialize() {
         try {
-            ObjectOutputStream ois = new ObjectOutputStream(new FileOutputStream("Database.out"));
-            ois.writeObject(Driver.d);
+            ObjectOutputStream ois = new ObjectOutputStream(new FileOutputStream("Teachers.out"));
+            ois.writeObject(Database.teachers);
             ois.close();
         }catch (FileNotFoundException fn){
 
@@ -42,11 +62,10 @@ public class Database implements Serializable {
         }
 
     }
-
-    public static void deserialize() {
+    public static void teachersDeserialize() {
         try {
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Database.out"));
-            Driver.d = (Database)ois.readObject();
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Teachers.out"));
+            Database.teachers = (Vector<Teacher>) ois.readObject();
             ois.close();
         }catch (FileNotFoundException fn){
 
@@ -57,6 +76,190 @@ public class Database implements Serializable {
         }
     }
 
+    public static void studentsSerialize() {
+        try {
+            ObjectOutputStream ois = new ObjectOutputStream(new FileOutputStream("Students.out"));
+            ois.writeObject(Database.students);
+            ois.close();
+        }catch (FileNotFoundException fn){
+            System.out.println("File not found student");
+
+        }catch (IOException io){
+            System.out.println("IO student");
+        }
+
+    }
+    public static void studentsDeserialize() {
+        try {
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Students.out"));
+            Database.students = (Vector<Student>) ois.readObject();
+            ois.close();
+        }catch (FileNotFoundException fn){
+            System.out.println("not fount student");
+        }catch (IOException io){
+            System.out.println("io student des");
+        }catch (ClassNotFoundException cnfe){
+            System.out.println("class not found student");
+        }
+    }
+
+    public static void managersSerialize() {
+        try {
+            ObjectOutputStream ois = new ObjectOutputStream(new FileOutputStream("Managers.out"));
+            ois.writeObject(Database.managers);
+            ois.close();
+        }catch (FileNotFoundException fn){
+
+        }catch (IOException io){
+
+        }
+
+    }
+    public static void managersDeserialize() {
+        try {
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Managers.out"));
+            Database.managers = (Vector<Manager>) ois.readObject();
+            ois.close();
+        }catch (FileNotFoundException fn){
+
+        }catch (IOException io){
+
+        }catch (ClassNotFoundException cnfe){
+
+        }
+    }
+
+    public static void adminsSerialize() {
+        try {
+            ObjectOutputStream ois = new ObjectOutputStream(new FileOutputStream("Admins.out"));
+            ois.writeObject(Database.admins);
+            ois.close();
+        }catch (FileNotFoundException fn){
+
+        }catch (IOException io){
+
+        }
+
+    }
+    public static void adminsDeserialize() {
+        try {
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Admins.out"));
+            Database.admins = (Vector<Admin>) ois.readObject();
+            ois.close();
+        }catch (FileNotFoundException fn){
+            System.out.println("io student des");
+
+        }catch (IOException io){
+            System.out.println("io afmin des");
+
+        }catch (ClassNotFoundException cnfe){
+
+        }
+    }
+
+    public static void executorsSerialize() {
+        try {
+            ObjectOutputStream ois = new ObjectOutputStream(new FileOutputStream("Executors.out"));
+            ois.writeObject(Database.executors);
+            ois.close();
+        }catch (FileNotFoundException fn){
+
+        }catch (IOException io){
+
+        }
+
+    }
+    public static void executorsDeserialize() {
+        try {
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Executors.out"));
+            Database.executors = (Vector<Executor>) ois.readObject();
+            ois.close();
+        }catch (FileNotFoundException fn){
+
+        }catch (IOException io){
+
+        }catch (ClassNotFoundException cnfe){
+
+        }
+    }
+
+    public static void ordersSerialize() {
+        try {
+            ObjectOutputStream ois = new ObjectOutputStream(new FileOutputStream("Orders.out"));
+            ois.writeObject(Database.orders);
+            ois.close();
+        }catch (FileNotFoundException fn){
+
+        }catch (IOException io){
+
+        }
+
+    }
+    public static void ordersDeserialize() {
+        try {
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Orders.out"));
+            Database.orders = (Vector<Order>) ois.readObject();
+            ois.close();
+        }catch (FileNotFoundException fn){
+
+        }catch (IOException io){
+
+        }catch (ClassNotFoundException cnfe){
+
+        }
+    }
+
+    public static void donedOrdersSerialize() {
+        try {
+            ObjectOutputStream ois = new ObjectOutputStream(new FileOutputStream("DonedOrders.out"));
+            ois.writeObject(Database.donedOrders);
+            ois.close();
+        }catch (FileNotFoundException fn){
+
+        }catch (IOException io){
+
+        }
+
+    }
+    public static void donedOrdersDeserialize() {
+        try {
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("DonedOrders.out"));
+            Database.donedOrders = (Vector<Order>) ois.readObject();
+            ois.close();
+        }catch (FileNotFoundException fn){
+
+        }catch (IOException io){
+
+        }catch (ClassNotFoundException cnfe){
+
+        }
+    }
+
+    public static void coursesSerialize() {
+        try {
+            ObjectOutputStream ois = new ObjectOutputStream(new FileOutputStream("Courses.out"));
+            ois.writeObject(Database.courses);
+            ois.close();
+        }catch (FileNotFoundException fn){
+
+        }catch (IOException io){
+
+        }
+
+    }
+    public static void coursesDeserialize() {
+        try {
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Courses.out"));
+            Database.courses = (Vector<Course>) ois.readObject();
+            ois.close();
+        }catch (FileNotFoundException fn){
+
+        }catch (IOException io){
+
+        }catch (ClassNotFoundException cnfe){
+
+        }
+    }
 
     static Vector<Admin> getAdmins() { return admins; }
     public static void setAdmins(Vector<Admin> admins) { Database.admins = admins; }
@@ -81,6 +284,8 @@ public class Database implements Serializable {
 
     public static Vector<Course> getCourses() { return courses; }
     public static void setCourses(Vector<Course> courses) { Database.courses = courses; }
+
+
 
     @Override
     public String toString() {

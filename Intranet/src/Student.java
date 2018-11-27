@@ -104,6 +104,14 @@ public class Student extends User implements Serializable{
 
     @Override
     public String toString() {
-        return super.toString() + " " + faculty  + " " + specialization + " " + degree;
+        return "Student{" +
+                "degree=" + degree +
+                ", yearOfStudy=" + yearOfStudy +
+                ", faculty='" + faculty + '\'' +
+                ", specialization='" + specialization + '\'' +
+                ", transcript=" + transcript +
+                ", takenCourses=" + takenCourses +
+                ", marks=" + marks +
+                '}';
     }
 }

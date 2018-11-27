@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.Vector;
 
-public class Transcript {
+public class Transcript implements Serializable {
 
     private String studentName;
     private double totalGPA;

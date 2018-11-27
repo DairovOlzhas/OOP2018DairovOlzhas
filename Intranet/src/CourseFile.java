@@ -1,8 +1,9 @@
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class CourseFile {
+public class CourseFile implements Serializable {
     private String fileName;
     private Date dateOfLoading;
     private File file;

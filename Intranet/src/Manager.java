@@ -49,6 +49,9 @@ public class Manager extends Employee {
         Database.setTeachers(teachers);
     }
 
-
-
+    @Override
+    public String toString() {
+        return "Manager{ username = " + getUsername()
+                + "}";
+    }
 }
